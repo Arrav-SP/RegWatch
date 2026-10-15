@@ -3,7 +3,7 @@
 Usage: python extract.py [limit]      (resumable; skips items already in data/extracted.jsonl)
 Config in regwatch/.env (never commit it). Any OpenAI-compatible endpoint works:
   LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/   (Gemini)
-  LLM_MODEL=gemini-2.5-flash-lite
+  LLM_MODEL=gemini-3.5-flash-lite
   LLM_API_KEY=...
 Optional: LLM_BATCH (items per call, default 10), LLM_WORKERS (default 2), LLM_RPM (default 12).
 """
@@ -53,7 +53,7 @@ Return JSON {"items": [...]} with one object per input item, same order, with ex
 Use only what the text says. Do not guess."""
 
 client = OpenAI(base_url=os.environ.get("LLM_BASE_URL"), api_key=os.environ.get("LLM_API_KEY", "none"))
-MODEL = os.environ.get("LLM_MODEL", "gemini-2.5-flash-lite")
+MODEL = os.environ.get("LLM_MODEL", "gemini-3.5-flash-lite")
 BATCH = int(os.environ.get("LLM_BATCH", 10))
 GAP = 60 / float(os.environ.get("LLM_RPM", 12))
 lock, last_call = threading.Lock(), [0.0]
@@ -77,6 +77,8 @@ def call(batch):
                 return [got[k] for k, _ in batch]
             print(f"  batch returned {len(got)}/{len(batch)} keys, retrying", flush=True)
         except Exception as e:
+            if getattr(e, "status_code", 429) in (400, 401, 403, 404):  # bad key/model: retrying won't help
+                raise
             print(f"  error ({type(e).__name__}: {str(e)[:120]}), retry {attempt + 1}", flush=True)
             time.sleep(2 ** attempt * 5)
     return None

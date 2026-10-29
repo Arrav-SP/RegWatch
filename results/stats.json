@@ -1,10 +1,10 @@
 {
-  "n_decisions": 1083,
-  "era_chi2": 0.0,
-  "era_dof": 0,
-  "era_p": 1.0,
-  "waiver_requests": 83,
-  "waiver_reject_odds_ratio": 9.79,
-  "waiver_fisher_p": 1.3469377231547225e-14,
-  "reasons_stated_overall": 0.502
+  "n_decisions": 4575,
+  "era_chi2": 70.29,
+  "era_dof": 15,
+  "era_p": 3.961201340244045e-09,
+  "waiver_requests": 423,
+  "waiver_reject_odds_ratio": 7.26,
+  "waiver_fisher_p": 8.826250163965616e-45,
+  "reasons_stated_overall": 0.307
 }

@@ -1,3 +1,5 @@
 model,n,macro_f1,kappa
+majority (test),1775,0.097,0.0
+tfidf+gbm (test),1775,0.447,0.345
 majority (gold),181,0.066,0.0
-tfidf+gbm (gold),181,0.21,0.028
+tfidf+gbm (gold),181,0.386,0.246

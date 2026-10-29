@@ -1,16 +1,20 @@
 committee,approved,approved_with_conditions,more_info_requested,rejected,deferred,n
-Antimicrobial & Antiviral,0.267,0.252,0.214,0.061,0.183,131
-Cardiovascular & Renal,0.25,0.388,0.216,0.06,0.086,116
-Endocrinology & Metabolism,0.354,0.301,0.168,0.097,0.08,113
-"Analgesics, Rheumatology & Orthopaedics",0.136,0.355,0.245,0.082,0.173,110
-Oncology & Haematology,0.468,0.248,0.11,0.064,0.083,109
-Vaccine,0.367,0.367,0.167,0.056,0.044,90
-Dermatology & Allergy,0.127,0.481,0.266,0.051,0.076,79
-Neurology & Psychiatry,0.247,0.468,0.195,0.039,0.052,77
-Gastroenterology & Hepatology,0.246,0.333,0.232,0.116,0.072,69
-Pulmonary,0.175,0.365,0.127,0.143,0.19,63
-Reproductive & Urology,0.271,0.322,0.186,0.068,0.153,59
-Ophthalmology,0.25,0.273,0.25,0.068,0.136,44
-Radio-Diagnostic,0.083,0.833,0.0,0.083,0.0,12
-Nephrology & Urology,0.125,0.0,0.5,0.25,0.125,8
-Dentistry,0.0,0.667,0.0,0.0,0.333,3
+Oncology & Haematology,0.426,0.246,0.117,0.043,0.141,744
+Cardiovascular & Renal,0.229,0.342,0.178,0.061,0.162,506
+Endocrinology & Metabolism,0.244,0.322,0.181,0.081,0.147,491
+"Analgesics, Rheumatology & Orthopaedics",0.182,0.327,0.218,0.084,0.17,358
+Neurology & Psychiatry,0.27,0.253,0.188,0.067,0.183,356
+Gastroenterology & Hepatology,0.249,0.298,0.17,0.116,0.14,329
+COVID-19,0.159,0.325,0.318,0.069,0.093,289
+Dermatology & Allergy,0.202,0.359,0.233,0.098,0.098,287
+Antimicrobial & Antiviral,0.261,0.254,0.207,0.075,0.175,280
+Pulmonary,0.187,0.382,0.16,0.08,0.156,262
+Vaccine,0.305,0.292,0.214,0.049,0.045,243
+Reproductive & Urology,0.196,0.371,0.222,0.062,0.139,194
+Ophthalmology,0.248,0.342,0.181,0.087,0.101,149
+Nephrology & Urology,0.162,0.189,0.378,0.108,0.108,37
+Radio-Diagnostic,0.103,0.586,0.103,0.069,0.034,29
+Veterinary,0.2,0.3,0.5,0.0,0.0,10
+Dentistry,0.125,0.375,0.375,0.0,0.0,8
+IND,0.5,0.5,0.0,0.0,0.0,2
+Cellular & Stem Cell,0.0,0.0,1.0,0.0,0.0,1

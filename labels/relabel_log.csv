@@ -1,0 +1,83 @@
+﻿key,field,old,new,rule,reason
+1059-2856,decision,other,rejected,R4 other only when no request/decision,PMS data not accepted as representative
+1122-3153,decision,other,more_info_requested,R4 other only when no request/decision,justification needed to consider further
+1123-3158,request_type,post_marketing,new_indication_or_change,R2 request_type = what was asked,additional indication; Phase IV is a condition
+1219-3717,request_type,other,marketing_new_drug,R4 other only when no request/decision,SND/MA marketing proposal
+1259-3907,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,import & marketing; Phase IV is a condition
+1334-4329,request_type,clinical_trial,marketing_new_drug,R4 other only when no request/decision,FDC import proposal
+1334-4329,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,told to conduct Phase III
+1395-4686,request_type,other,marketing_new_drug,R4 other only when no request/decision,FDC marketing proposal
+1416-4800,request_type,post_marketing,new_indication_or_change,R2 request_type = what was asked,additional indication
+165-233,decision,other,more_info_requested,R4 other only when no request/decision,toxicity studies in two species asked
+165-235,decision,other,approved,R4 other only when no request/decision,Phase II/III recommended
+165-239,request_type,post_marketing,new_indication_or_change,R2 request_type = what was asked,booster dose / new age group
+165-239,decision,other,approved_with_conditions,R4 other only when no request/decision,recommended with Phase IV condition
+165-242,decision,other,approved,R4 other only when no request/decision,CT proposal recommended
+1673-6378,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,import & marketing; PSUR is a condition
+1800-7251,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,told to run clinical investigation in India
+1805-7277,decision,other,deferred,R4 other only when no request/decision,deferred to next meeting
+1835-7525,decision,other,deferred,R4 other only when no request/decision,deferred to next meeting
+1836-7534,decision,other,deferred,R4 other only when no request/decision,deferred to next meeting
+1934-8346,decision,other,deferred,R4 other only when no request/decision,deferred to next meeting
+1951-8481,request_type,bioequivalence,new_indication_or_change,R2 request_type = what was asked,new dosage form marketing; Phase IV is a condition
+1951-8481,decision,more_info_requested,approved_with_conditions,R3 granted subject to submitting = approved_with_conditions,approved with Phase IV protocol condition
+1960-8574,decision,other,deferred,R4 other only when no request/decision,deferred to next meeting
+1978-8692,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,new drug import; Phase IV is a condition
+2083-9411,decision,other,more_info_requested,R4 other only when no request/decision,protocol changes asked
+2136-9764,request_type,other,new_indication_or_change,R4 other only when no request/decision,PI update (post-approval change)
+2259-10385,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,new drug import; Phase IV is a condition
+2299-10538,decision,other,approved_with_conditions,R3 granted subject to submitting = approved_with_conditions,PI update subject to supporting documents
+2333-10735,request_type,bioequivalence,marketing_new_drug,R2 request_type = what was asked,manufacture & marketing proposal
+2333-10735,decision,more_info_requested,rejected,R1 waiver refused/told to run local trial = rejected,told to conduct Phase III
+2468-11341,decision,other,approved,R4 other only when no request/decision,CT permission granted
+255-247,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,marketing with waiver; Phase IV is a condition
+258-257,request_type,clinical_trial,marketing_new_drug,R2 request_type = what was asked,waiver request for marketing
+258-257,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,waiver refused
+2620-12119,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,manufacture & marketing; Phase IV is a condition
+2669-12308,request_type,post_marketing,new_indication_or_change,R2 request_type = what was asked,additional indication; PMS is a condition
+2669-12308,decision,approved,approved_with_conditions,R3 granted subject to submitting = approved_with_conditions,approved with PMS protocol condition
+2712-12487,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,marketing authorisation; Phase IV is a condition
+2767-12581,decision,other,approved,R4 other only when no request/decision,Phase IV per presented protocol
+2906-13145,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,FDC import; Phase IV protocol asked
+3019-13569,request_type,bioequivalence,marketing_new_drug,R2 request_type = what was asked,manufacture & marketing (BE report presented)
+3019-13569,decision,other,approved,R4 other only when no request/decision,"BE report accepted, marketing recommended"
+3035-13651,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,"waiver refused, Phase III in India"
+3125-13966,decision,other,approved,R4 other only when no request/decision,PI update agreed
+346-551,request_type,clinical_trial,marketing_new_drug,R2 request_type = what was asked,FDC justification for marketing
+346-551,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,told to conduct Phase III
+357-627,request_type,other,clinical_trial,R4 other only when no request/decision,CT permission request
+357-627,decision,more_info_requested,approved_with_conditions,R3 granted subject to submitting = approved_with_conditions,granted subject to submitting details before start
+366-680,decision,other,approved,R4 other only when no request/decision,CT permission granted
+371-716,decision,more_info_requested,approved_with_conditions,R3 granted subject to submitting = approved_with_conditions,BE granted subject to revised protocol
+386-827,request_type,clinical_trial,marketing_new_drug,R2 request_type = what was asked,waiver request for marketing
+386-827,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,waiver refused
+395-912,request_type,clinical_trial,marketing_new_drug,R2 request_type = what was asked,waiver request for marketing
+395-912,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,"waiver refused, Phase III in India"
+410-1016,decision,other,approved_with_conditions,R4 other only when no request/decision,Phase IV allowed with PSUR condition
+415-1045,request_type,other,clinical_trial,R4 other only when no request/decision,academic CT
+415-1045,decision,other,rejected,R4 other only when no request/decision,could not approve study
+415-1046,request_type,other,clinical_trial,R4 other only when no request/decision,CT protocol
+415-1047,request_type,other,clinical_trial,R4 other only when no request/decision,CT protocol
+415-1048,decision,other,approved,R4 other only when no request/decision,study recommended
+415-1049,request_type,other,clinical_trial,R4 other only when no request/decision,CT protocol
+415-1051,request_type,other,protocol_amendment,R4 other only when no request/decision,protocol modification sought
+415-1051,decision,other,rejected,R4 other only when no request/decision,modification not accepted
+415-1052,request_type,other,clinical_trial,R4 other only when no request/decision,CT protocol
+416-1056,request_type,other,protocol_amendment,R4 other only when no request/decision,protocol amendment presented
+419-1065,request_type,other,clinical_trial,R4 other only when no request/decision,CT proposal
+433-1167,request_type,other,clinical_trial,R4 other only when no request/decision,PK/PD study protocol
+460-1327,request_type,post_marketing,marketing_new_drug,R2 request_type = what was asked,FDC marketing; Phase IV protocol asked
+506-1352,request_type,post_marketing,new_indication_or_change,R2 request_type = what was asked,new route + indication; Phase IV is a condition
+512-1382,decision,other,rejected,R4 other only when no request/decision,committee did not agree
+522-1413,request_type,other,clinical_trial,R4 other only when no request/decision,CT permission request
+599-1460,request_type,other,marketing_new_drug,R4 other only when no request/decision,SND marketing proposal
+599-1460,decision,other,more_info_requested,R4 other only when no request/decision,submit complete data after study
+608-1517,request_type,other,clinical_trial,R4 other only when no request/decision,revised CT protocol
+608-1517,decision,other,more_info_requested,R4 other only when no request/decision,revise protocol and place again
+618-1582,decision,other,deferred,R4 other only when no request/decision,referred to next meeting
+621-1613,request_type,other,clinical_trial,R4 other only when no request/decision,CT site addition
+621-1613,decision,other,approved,R4 other only when no request/decision,treated as additional site of approved protocol
+630-1681,request_type,other,clinical_trial,R4 other only when no request/decision,clamp study protocol
+862-1724,request_type,clinical_trial,marketing_new_drug,R2 request_type = what was asked,FDC import
+862-1724,decision,other,rejected,R1 waiver refused/told to run local trial = rejected,reiterated Phase III requirement
+992-2456,decision,more_info_requested,rejected,R1 waiver refused/told to run local trial = rejected,told to run clinical investigation in India

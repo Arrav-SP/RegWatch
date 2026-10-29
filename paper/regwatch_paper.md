@@ -13,7 +13,7 @@ Against 200 hand-labelled items, the extraction reaches Cohen's κ = 0.84 for th
 - waiver requests are 7.3× more likely to be rejected (Fisher p < 10⁻⁴⁴);
 - the share of decisions stating any reason fell from about 44% (2016–17) to about 21% (2023–25).
 
-A leak-free baseline that predicts the decision from the request text alone reaches κ = 0.35 on later years.
+Predicting the decision from the request text alone, without leaking the verdict, a fine-tuned BiomedBERT reaches κ = 0.40 on later years, against 0.35 for a TF-IDF baseline.
 
 ## 1. Introduction
 SEC recommendations decide whether new drugs, trials and label changes reach Indian patients, yet they exist only as PDF tables. Prior work examined subsets by hand [Shetty et al., citation needed]. We ask three questions:
@@ -92,9 +92,9 @@ See `results/decisions_by_year.png` and `results/transparency_by_year.png`.
 |---|---|---|---|---|
 | Majority class | 0.10 | 0.00 | 0.07 | 0.00 |
 | TF-IDF + SVD + request fields → gradient boosting | 0.45 | 0.35 | 0.39 | 0.25 |
-| BiomedBERT (PubMedBERT) fine-tuned | `[PENDING]` | `[PENDING]` | `[PENDING]` | `[PENDING]` |
+| BiomedBERT (PubMedBERT) fine-tuned, 3 epochs | 0.54 | 0.40 | 0.49 | 0.36 |
 
-The request text carries real signal about the outcome, well above chance, but most of the decision depends on deliberation not visible in the request.
+Fine-tuned BiomedBERT beats the TF-IDF baseline on both the later-year test set (κ 0.40 vs 0.35) and the human-labelled gold items (κ 0.36 vs 0.25). The request text carries real signal about the outcome, but most of the decision depends on deliberation not visible in the request.
 
 ## 6. Limitations
 - **Single annotator.** Gold v2 was revised with LLM assistance, which may bias gold toward model behaviour. Mitigations: written rules, a full change log, annotator review, and both versions reported.

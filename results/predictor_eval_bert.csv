@@ -1,0 +1,3 @@
+model,n,macro_f1,kappa
+biomedbert (test),1775,0.537,0.4
+biomedbert (gold),181,0.493,0.357

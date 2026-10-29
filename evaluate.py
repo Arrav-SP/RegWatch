@@ -1,6 +1,6 @@
 """Day 3: score the LLM extraction against Arav's hand labels.
 
-Usage: python evaluate.py [gold.xlsx|gold.csv]   (default labels/gold.xlsx)
+Usage: python evaluate.py [gold.xlsx|gold.csv] [predictions.jsonl]   (defaults labels/gold.xlsx, data/extracted.jsonl)
 Prints and writes results/extraction_eval.csv: per field n, accuracy, macro-F1, Cohen's kappa.
 """
 import csv, json, sys
@@ -39,7 +39,8 @@ if __name__ == "__main__":
     if gold and "checked" in gold[0]:  # human_verified.xlsx: score only rows Arav has checked
         gold = [g for g in gold if str(g["checked"]).strip().upper() == "YES"]
         print(f"{len(gold)} human-checked rows")
-    pred = {(o := json.loads(l))["key"]: o for l in open(HERE / "data/extracted.jsonl", encoding="utf-8")}
+    pred_path = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE / "data/extracted.jsonl"
+    pred = {(o := json.loads(l))["key"]: o for l in open(pred_path, encoding="utf-8")}
     missing = [g["key"] for g in gold if g["key"] not in pred]
     if missing:
         print(f"warning: {len(missing)} gold items not extracted yet (re-run extract.py)")

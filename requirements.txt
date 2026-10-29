@@ -1,0 +1,8 @@
+scikit-learn
+pandas
+openpyxl
+pymupdf
+requests
+openai
+matplotlib
+scipy

@@ -1,6 +1,7 @@
 """Day 2b: LLM extraction of structured fields from each agenda item.
 
 Usage: python extract.py [limit]      (resumable; skips items already in data/extracted.jsonl)
+       python extract.py --gold       (only the gold-labelled items -> data/extracted_gold.jsonl)
 Config in regwatch/.env (never commit it). Any OpenAI-compatible endpoint works:
   LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/   (Gemini)
   LLM_MODEL=gemini-3.5-flash-lite
@@ -34,17 +35,18 @@ Return JSON {"items": [...]} with one object per input item, same order, with ex
     "marketing_new_drug" (import/manufacture and market a new drug),
     "new_indication_or_change" (new indication, dosage form, strength, route, age group, label change for an approved drug),
     "protocol_amendment",
-    "post_marketing" (PMS / Phase IV / PSUR related),
-    "other"
+    "post_marketing" (only when the request itself is PMS / Phase IV / PSUR),
+    "other" (no identifiable request: firm absent, withdrawn, study-report review, admin item)
+  request_type is what the firm asked for, not what the committee imposed: a new indication or new drug approved on condition of a Phase IV study is new_indication_or_change / marketing_new_drug, not post_marketing.
 - "ct_phase": "I","II","III","IV","BE" or null
 - "local_ct_waiver_requested": true if the firm asked to waive the local (Indian) clinical trial, else false
 - "decision": one of
     "approved" (recommended / agreed, no conditions),
-    "approved_with_conditions" (recommended subject to conditions such as PMS, Phase IV, protocol changes),
-    "rejected" (not recommended / not approved),
-    "more_info_requested" (firm asked to submit data, revise and resubmit, or present again),
+    "approved_with_conditions" (recommended subject to conditions such as PMS, Phase IV, protocol changes, including "granted subject to submitting a revised protocol / details"),
+    "rejected" (not recommended / not approved; also a refused local CT waiver or "firm should conduct Phase III in India"),
+    "more_info_requested" (nothing granted yet: firm asked to submit data, revise and resubmit, or present again),
     "deferred" (not taken up: firm absent, not ready, adjourned),
-    "other"
+    "other" (no decision on an application: study report accepted / noted, withdrawn, informational)
 - "waiver_granted": true/false if a local CT waiver was decided, else null
 - "reasons_stated": true if the committee gives any justification for its decision (efficacy, safety, unmet need, data gaps, etc.)
 - "reason_summary": one short sentence of the stated reason, or null
@@ -87,11 +89,17 @@ def call(batch):
 
 
 def main():
-    limit = int(sys.argv[1]) if len(sys.argv) > 1 else None
+    gold = "--gold" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--gold"]
+    limit = int(args[0]) if args else None
     items = [json.loads(l) for l in open(DATA / "items.jsonl", encoding="utf-8")]
-    out_path = DATA / "extracted.jsonl"
+    out_path = DATA / ("extracted_gold.jsonl" if gold else "extracted.jsonl")
     done = {json.loads(l)["key"] for l in open(out_path, encoding="utf-8")} if out_path.exists() else set()
     todo = [(f"{it['pdf_id']}-{n}", it) for n, it in enumerate(items) if len(it["text"]) >= 80]
+    if gold:  # score a prompt change on the 200 hand-labelled items without touching the main output
+        import pandas as pd
+        keys = set(pd.read_excel(HERE / "labels/gold.xlsx", dtype=str)["key"])
+        todo = [t for t in todo if t[0] in keys]
     todo = [t for t in todo if t[0] not in done][:limit]
     batches = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
     print(f"{len(done)} done, {len(todo)} to go in {len(batches)} calls with {MODEL}", flush=True)

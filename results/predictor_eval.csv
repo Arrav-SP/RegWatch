@@ -1,0 +1,3 @@
+model,n,macro_f1,kappa
+majority (gold),181,0.066,0.0
+tfidf+gbm (gold),181,0.21,0.028

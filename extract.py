@@ -8,7 +8,7 @@ Config in regwatch/.env (never commit it). Any OpenAI-compatible endpoint works:
 Optional: LLM_BATCH (items per call, default 10), LLM_WORKERS (default 2), LLM_RPM (default 12).
 """
 import json, os, sys, threading, time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from openai import OpenAI
@@ -52,7 +52,9 @@ Return JSON {"items": [...]} with one object per input item, same order, with ex
 - "risk_benefit_discussed": true if the minutes explicitly weigh benefits against risks/safety
 Use only what the text says. Do not guess."""
 
-client = OpenAI(base_url=os.environ.get("LLM_BASE_URL"), api_key=os.environ.get("LLM_API_KEY", "none"))
+# no SDK retries: they silently wait out 429s; our loop logs and backs off instead
+client = OpenAI(base_url=os.environ.get("LLM_BASE_URL"), api_key=os.environ.get("LLM_API_KEY", "none"),
+                timeout=120, max_retries=0)
 MODEL = os.environ.get("LLM_MODEL", "gemini-3.5-flash-lite")
 BATCH = int(os.environ.get("LLM_BATCH", 10))
 GAP = 60 / float(os.environ.get("LLM_RPM", 12))
@@ -96,7 +98,9 @@ def main():
     failed = 0
     with ThreadPoolExecutor(int(os.environ.get("LLM_WORKERS", 2))) as ex, \
             open(out_path, "a", encoding="utf-8") as f:
-        for n, res in enumerate(ex.map(call, batches), 1):
+        # write as each batch finishes so one slow batch never holds back the rest
+        for n, fut in enumerate(as_completed([ex.submit(call, b) for b in batches]), 1):
+            res = fut.result()
             if res is None: failed += 1; continue
             for o in res: f.write(json.dumps(o, ensure_ascii=False) + "\n")
             f.flush()

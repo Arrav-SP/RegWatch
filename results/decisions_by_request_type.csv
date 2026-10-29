@@ -1,0 +1,8 @@
+request_type,approved,approved_with_conditions,more_info_requested,rejected,deferred,n
+bioequivalence,0.3,0.414,0.2,0.071,0.014,70
+clinical_trial,0.268,0.347,0.228,0.052,0.101,426
+marketing_new_drug,0.228,0.359,0.151,0.108,0.147,259
+new_indication_or_change,0.328,0.272,0.236,0.097,0.067,195
+other,0.087,0.087,0.087,0.0,0.652,23
+post_marketing,0.15,0.5,0.15,0.062,0.112,80
+protocol_amendment,0.567,0.3,0.067,0.067,0.0,30

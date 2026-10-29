@@ -36,11 +36,16 @@ if __name__ == "__main__":
         gold = pd.read_excel(path, dtype=str).fillna("").to_dict("records")
     else:
         gold = list(csv.DictReader(open(path, encoding="utf-8-sig")))
+    if gold and "checked" in gold[0]:  # human_verified.xlsx: score only rows Arav has checked
+        gold = [g for g in gold if str(g["checked"]).strip().upper() == "YES"]
+        print(f"{len(gold)} human-checked rows")
     pred = {(o := json.loads(l))["key"]: o for l in open(HERE / "data/extracted.jsonl", encoding="utf-8")}
     missing = [g["key"] for g in gold if g["key"] not in pred]
     if missing:
         print(f"warning: {len(missing)} gold items not extracted yet (re-run extract.py)")
     res = evaluate(gold, pred)
+    if not res:
+        sys.exit("nothing to score yet (no labelled rows that have been extracted)")
     (HERE / "results").mkdir(exist_ok=True)
     with open(HERE / "results/extraction_eval.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=res[0]); w.writeheader(); w.writerows(res)

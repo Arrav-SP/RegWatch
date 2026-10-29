@@ -103,13 +103,20 @@ def main():
     todo = [t for t in todo if t[0] not in done][:limit]
     batches = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
     print(f"{len(done)} done, {len(todo)} to go in {len(batches)} calls with {MODEL}", flush=True)
-    failed = 0
+    failed = streak = 0
     with ThreadPoolExecutor(int(os.environ.get("LLM_WORKERS", 2))) as ex, \
             open(out_path, "a", encoding="utf-8") as f:
         # write as each batch finishes so one slow batch never holds back the rest
         for n, fut in enumerate(as_completed([ex.submit(call, b) for b in batches]), 1):
             res = fut.result()
-            if res is None: failed += 1; continue
+            if res is None:
+                failed += 1; streak += 1
+                if streak >= 3:  # free-tier daily quota is gone; more calls only waste it
+                    ex.shutdown(wait=False, cancel_futures=True)
+                    print("3 batches failed in a row: quota exhausted, re-run later (resumable)", flush=True)
+                    break
+                continue
+            streak = 0
             for o in res: f.write(json.dumps(o, ensure_ascii=False) + "\n")
             f.flush()
             if n % 20 == 0: print(f"  {n}/{len(batches)} calls", flush=True)

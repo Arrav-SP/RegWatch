@@ -1,6 +1,6 @@
 field,n,accuracy,macro_f1,kappa
-is_decision,109,0.963,0.657,0.314
-request_type,109,0.798,0.742,0.734
-local_ct_waiver_requested,109,1.0,1.0,1.0
-decision,109,0.853,0.814,0.815
-reasons_stated,109,0.826,0.824,0.648
+is_decision,200,0.99,0.831,0.662
+request_type,200,0.795,0.777,0.74
+local_ct_waiver_requested,200,0.99,0.966,0.932
+decision,200,0.875,0.87,0.844
+reasons_stated,200,0.805,0.8,0.602

@@ -8,7 +8,7 @@ Config in regwatch/.env (never commit it). Any OpenAI-compatible endpoint works:
   LLM_API_KEY=...
 Optional: LLM_BATCH (items per call, default 10), LLM_WORKERS (default 2), LLM_RPM (default 12).
 """
-import json, os, sys, threading, time
+import json, os, random, sys, threading, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -100,6 +100,7 @@ def main():
         import pandas as pd
         keys = set(pd.read_excel(HERE / "labels/gold.xlsx", dtype=str)["key"])
         todo = [t for t in todo if t[0] in keys]
+    random.Random(0).shuffle(todo)  # fixed random order: a partial run is a fair sample across all years
     todo = [t for t in todo if t[0] not in done][:limit]
     batches = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
     print(f"{len(done)} done, {len(todo)} to go in {len(batches)} calls with {MODEL}", flush=True)

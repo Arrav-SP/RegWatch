@@ -1,6 +1,6 @@
 # RegWatch: LLM-Assisted Structuring and Analysis of a Decade of Indian Drug-Approval Committee Decisions
 
-*Draft, 2026-10-30. Numbers come from a fixed-seed random sample of 4,670 extracted agenda items (about one third of the corpus). The `[SAMPLE]` tables are refreshed when extraction completes. `[PENDING]` marks results that haven't been run yet.*
+*Draft, 2026-11-01. All numbers come from the full corpus: 14,121 extracted agenda items, of which 13,866 are decisions.*
 
 ## Abstract
 India's Central Drugs Standard Control Organisation (CDSCO) publishes the recommendations of its Subject Expert Committees (SECs) as unstructured PDF minutes. We build RegWatch, a pipeline that turns 1,864 SEC minutes (2015–2026) into a structured dataset of agenda-item decisions:
@@ -8,12 +8,12 @@ India's Central Drugs Standard Control Organisation (CDSCO) publishes the recomm
 - OCR for scanned files;
 - extraction of request type, decision, local-trial waiver and stated reasons by a large language model (LLM).
 
-Against 200 hand-labelled items, the extraction reaches Cohen's κ = 0.84 for the decision and κ = 0.74 for the request type. In a 4,575-decision random sample:
-- the decision mix differs across regulatory eras (χ² = 70.3, dof = 15, p < 10⁻⁸);
-- waiver requests are 7.3× more likely to be rejected (Fisher p < 10⁻⁴⁴);
-- the share of decisions stating any reason fell from about 44% (2016–17) to about 21% (2023–25).
+Against 200 hand-labelled items, the extraction reaches Cohen's κ = 0.84 for the decision and κ = 0.74 for the request type. Across 13,866 decisions:
+- the decision mix differs across regulatory eras (χ² = 183.3, dof = 15, p < 10⁻³⁰);
+- waiver requests have 7.5× the odds of rejection (Fisher p < 10⁻¹²⁸);
+- the share of decisions stating any reason fell from about 47% (2016–17) to about 21% (2023–25).
 
-Predicting the decision from the request text alone, without leaking the verdict, a fine-tuned BiomedBERT reaches κ = 0.40 on later years, against 0.35 for a TF-IDF baseline.
+Predicting the decision from the request text alone, without leaking the verdict, a fine-tuned BiomedBERT reaches κ = 0.39 on later years and 0.38 on human-labelled items, against 0.37 and 0.33 for a TF-IDF baseline.
 
 ## 1. Introduction
 SEC recommendations decide whether new drugs, trials and label changes reach Indian patients, yet they exist only as PDF tables. Prior work examined subsets by hand [Shetty et al., citation needed]. We ask three questions:
@@ -52,59 +52,59 @@ SEC recommendations decide whether new drugs, trials and label changes reach Ind
 - Marketing requests that include a bioequivalence or clinical study are labelled *clinical_trial* or *bioequivalence*.
 - The model over-uses *approved_with_conditions*: 15 of its 25 decision errors.
 
-## 4. Trends (RQ2) `[SAMPLE]`
-Sample: n = 4,575 decisions, with every year from 2015 to 2026 represented. 2015–16 has only 92 items.
+## 4. Trends (RQ2)
+n = 13,866 decisions, with every year from 2015 to 2026 represented. 2015 has only 21 items, so 2015 shares are noisy.
 
 **Decision share by regulatory era:**
 
 | Era | Approved | Approved w/ conditions | More info | Rejected | Deferred | n |
 |---|---|---|---|---|---|---|
-| ≤2018 (pre-NDCT) | 0.25 | 0.36 | 0.17 | 0.10 | 0.10 | 921 |
-| 2019 (NDCT Rules) | 0.31 | 0.28 | 0.18 | 0.08 | 0.11 | 262 |
-| 2020–21 (COVID) | 0.24 | 0.30 | 0.23 | 0.08 | 0.13 | 921 |
-| 2022+ | 0.27 | 0.30 | 0.19 | 0.06 | 0.16 | 2,471 |
+| ≤2018 (pre-NDCT) | 0.26 | 0.34 | 0.17 | 0.11 | 0.10 | 1,659 |
+| 2019 (NDCT Rules) | 0.27 | 0.29 | 0.19 | 0.07 | 0.12 | 1,019 |
+| 2020–21 (COVID) | 0.25 | 0.31 | 0.22 | 0.08 | 0.12 | 3,134 |
+| 2022+ | 0.29 | 0.29 | 0.18 | 0.05 | 0.16 | 8,054 |
 
-- The mix differs significantly across eras (χ² = 70.3, dof = 15, p = 4×10⁻⁹).
-- Rejections fall steadily, from 10% to 6%.
+- The mix differs significantly across eras (χ² = 183.3, dof = 15, p = 5×10⁻³¹).
+- Rejections fall steadily, from 11% to 5%.
 - Deferrals rise, from 10% to 16%.
 - Requests for more information peaked during COVID.
 
-**Waivers.** 423 decisions involved a local-trial waiver request. A waiver request raises the odds of rejection 7.3-fold (Fisher exact p = 9×10⁻⁴⁵), consistent with earlier manual findings [Shetty et al.].
+**Waivers.** 1,276 decisions involved a local-trial waiver request. A waiver request raises the odds of rejection 7.5-fold (Fisher exact p = 3×10⁻¹²⁹), consistent with earlier manual findings [Shetty et al.].
 
-**Transparency.** Overall, 30.7% of decisions state any reason.
-- The share fell from 0.44 (2016–17) to 0.37 (2018), 0.26 (2022) and 0.19–0.24 (2023–25).
-- Explicit risk–benefit discussion fell from about 0.15 (2016–17) to about 0.03 (2023–25).
-- 2026 (partial year) shows a rebound to 0.35.
+**Transparency.** Overall, 28.9% of decisions state any reason.
+- The share fell from 0.47 (2016–17) to 0.39 (2018), 0.25 (2022) and 0.19–0.23 (2023–25).
+- Explicit risk–benefit discussion fell from about 0.17 (2016–17) to about 0.03 (2023–25).
+- 2026 (partial year) shows a rebound to 0.32.
 
 **By request type:**
-- Marketing applications for new drugs have the highest rejection rate (14%).
-- Bioequivalence studies are mostly approved with conditions (49%).
+- Marketing applications for new drugs (13%) and new indications or changes (12%) have the highest rejection rates.
+- Bioequivalence studies are mostly approved with conditions (45%); protocol amendments are mostly approved outright (71%).
 
 See `results/decisions_by_year.png` and `results/transparency_by_year.png`.
 
-## 5. Decision prediction (RQ3) `[SAMPLE]`
+## 5. Decision prediction (RQ3)
 **Setup.**
 - Input is only the request part of each item: text before the first verdict phrase, such as "After detailed deliberation" or "the committee recommended". Items without a clean cut are dropped, so the label cannot leak.
 - Labels are the LLM decisions (5 classes). Gold items are held out and scored against human labels.
-- Split by year: train ≤2022 (n = 2,356), test ≥2023 (n = 1,775).
+- Split by year: train ≤2022 (n = 6,978), test ≥2023 (n = 5,909); 181 gold items.
 
 | Model | Test macro-F1 | Test κ | Gold macro-F1 | Gold κ |
 |---|---|---|---|---|
 | Majority class | 0.10 | 0.00 | 0.07 | 0.00 |
-| TF-IDF + SVD + request fields → gradient boosting | 0.45 | 0.35 | 0.39 | 0.25 |
-| BiomedBERT (PubMedBERT) fine-tuned, 3 epochs | 0.54 | 0.40 | 0.49 | 0.36 |
+| TF-IDF + SVD + request fields → gradient boosting | 0.49 | 0.37 | 0.48 | 0.33 |
+| BiomedBERT (PubMedBERT) fine-tuned, 3 epochs | 0.53 | 0.39 | 0.53 | 0.38 |
 
-Fine-tuned BiomedBERT beats the TF-IDF baseline on both the later-year test set (κ 0.40 vs 0.35) and the human-labelled gold items (κ 0.36 vs 0.25). The request text carries real signal about the outcome, but most of the decision depends on deliberation not visible in the request.
+Fine-tuned BiomedBERT beats the TF-IDF baseline on both the later-year test set (κ 0.39 vs 0.37) and the human-labelled gold items (κ 0.38 vs 0.33). Its margin is largest on macro-F1 for gold items (0.53 vs 0.48), i.e. on the rarer classes. The request text carries real signal about the outcome, but most of the decision depends on deliberation not visible in the request.
 
 ## 6. Limitations
 - **Single annotator.** Gold v2 was revised with LLM assistance, which may bias gold toward model behaviour. Mitigations: written rules, a full change log, annotator review, and both versions reported.
 - **LLM labels.** The trend and prediction labels are LLM outputs. Gold accuracy (κ 0.74–0.84) bounds their reliability.
 - **OCR coverage.** 11 of 65 scanned PDFs yielded no items, and OCR items lose their table structure.
 - **Dates.** We use the release year, not the meeting date, so late-December meetings can shift by one year.
-- **Sample.** Current numbers come from a random third of the corpus. 2015–16 is thin (92 items).
+- **Coverage.** 2015 is thin (21 decisions); items under 80 characters were not extracted.
 
 ## 7. Conclusion
-`[To write after full extraction and the PubMedBERT run.]` RegWatch shows that an inexpensive LLM can structure regulatory minutes with substantial agreement with a human annotator. It also reveals a decline in stated justification in Indian drug-approval decisions since 2017.
+RegWatch turns a decade of CDSCO SEC minutes (14,121 agenda items, 2015–2026) into a structured dataset using a free-tier LLM. Against 200 hand labels it agrees at κ = 0.84 on the decision field. Three findings follow. The decision mix shifted across regulatory eras, with fewer outright rejections and more deferrals after 2022. Requests to waive local trials remain strongly associated with rejection (odds ratio 7.5). The share of decisions that state any reason halved, from about 47% in 2016–17 to about 21% in 2023–25, and explicit risk–benefit discussion almost disappeared. Finally, the request text alone predicts the verdict well above chance (BiomedBERT κ ≈ 0.39) but far from perfectly, so most of the outcome is decided in deliberation that the minutes increasingly do not record. Future work: a second annotator, meeting-level dates, and linking decisions to later market approvals.
 
 ## Reproducibility
 Code: `download_sec.py`, `segment.py`, `ocr.py`, `extract.py`, `evaluate.py`, `analyze.py`, `predict.py` and `predictor_pubmedbert.ipynb`. The data is rebuilt from public CDSCO pages. Gold labels (v1 and v2) and the relabel log are in `labels/`.

@@ -1,20 +1,20 @@
 committee,approved,approved_with_conditions,more_info_requested,rejected,deferred,n
-Oncology & Haematology,0.426,0.246,0.117,0.043,0.141,744
-Cardiovascular & Renal,0.229,0.342,0.178,0.061,0.162,506
-Endocrinology & Metabolism,0.244,0.322,0.181,0.081,0.147,491
-"Analgesics, Rheumatology & Orthopaedics",0.182,0.327,0.218,0.084,0.17,358
-Neurology & Psychiatry,0.27,0.253,0.188,0.067,0.183,356
-Gastroenterology & Hepatology,0.249,0.298,0.17,0.116,0.14,329
-COVID-19,0.159,0.325,0.318,0.069,0.093,289
-Dermatology & Allergy,0.202,0.359,0.233,0.098,0.098,287
-Antimicrobial & Antiviral,0.261,0.254,0.207,0.075,0.175,280
-Pulmonary,0.187,0.382,0.16,0.08,0.156,262
-Vaccine,0.305,0.292,0.214,0.049,0.045,243
-Reproductive & Urology,0.196,0.371,0.222,0.062,0.139,194
-Ophthalmology,0.248,0.342,0.181,0.087,0.101,149
-Nephrology & Urology,0.162,0.189,0.378,0.108,0.108,37
-Radio-Diagnostic,0.103,0.586,0.103,0.069,0.034,29
-Veterinary,0.2,0.3,0.5,0.0,0.0,10
-Dentistry,0.125,0.375,0.375,0.0,0.0,8
-IND,0.5,0.5,0.0,0.0,0.0,2
-Cellular & Stem Cell,0.0,0.0,1.0,0.0,0.0,1
+Oncology & Haematology,0.425,0.246,0.106,0.049,0.142,2465
+Endocrinology & Metabolism,0.235,0.336,0.174,0.073,0.155,1598
+Cardiovascular & Renal,0.263,0.294,0.186,0.054,0.179,1589
+Neurology & Psychiatry,0.282,0.279,0.208,0.057,0.155,1092
+COVID-19,0.145,0.341,0.307,0.086,0.097,980
+"Analgesics, Rheumatology & Orthopaedics",0.208,0.334,0.207,0.073,0.147,918
+Antimicrobial & Antiviral,0.251,0.244,0.193,0.075,0.182,911
+Gastroenterology & Hepatology,0.292,0.279,0.162,0.092,0.143,863
+Pulmonary,0.25,0.341,0.162,0.085,0.131,804
+Dermatology & Allergy,0.215,0.322,0.219,0.083,0.138,785
+Vaccine,0.342,0.291,0.201,0.047,0.053,571
+Reproductive & Urology,0.228,0.349,0.212,0.062,0.129,567
+Ophthalmology,0.251,0.349,0.168,0.072,0.108,501
+Nephrology & Urology,0.225,0.275,0.333,0.059,0.078,102
+Radio-Diagnostic,0.135,0.519,0.115,0.038,0.115,52
+Veterinary,0.281,0.125,0.562,0.0,0.031,32
+Dentistry,0.091,0.409,0.409,0.0,0.045,22
+IND,0.182,0.545,0.091,0.0,0.182,11
+Cellular & Stem Cell,0.0,0.0,1.0,0.0,0.0,3
